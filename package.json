@@ -1,0 +1,33 @@
+{
+    "name": "fara-back",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">=22.14.0"
+    },
+    "description": "API backend para el proyecto FARA, gestionando usuarios y contenido dinámico.",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "node --env-file=.env.production src/app.js",
+        "dev": "node --env-file=.env.development --watch src/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web.git"
+    },
+    "keywords": [
+        "nodejs",
+        "express",
+        "backend",
+        "API",
+        "cilsa",
+        "fara"
+    ],
+    "author": "Equipo Proyecto CILSA-FARA",
+    "license": "ISC",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web/issues"
+    },
+    "homepage": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web#readme"
+}
