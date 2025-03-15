@@ -31,6 +31,7 @@
     },
     "homepage": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web#readme",
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.21.2"
     }
 }
