@@ -29,5 +29,8 @@
     "bugs": {
         "url": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web/issues"
     },
-    "homepage": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web#readme"
+    "homepage": "https://github.com/Proyecto-Cilsa-Fara/Back_Cilsa_Fara-Web#readme",
+    "dependencies": {
+        "express": "^4.21.2"
+    }
 }
