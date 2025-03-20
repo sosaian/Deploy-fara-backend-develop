@@ -46,8 +46,7 @@ const mUser = {
     create: async (body) => {
 
         const password = body.password
-        const hashed = bcrypt.hashSync(password, 1)
-        
+        const hashed = bcrypt.hashSync(password, 1)        
         try {
             const existingUser = await User.findOne({ email: body.email });
             if (existingUser) {
@@ -68,8 +67,31 @@ const mUser = {
     getAll: async () => {
         const users = await User.find({})
         return users
+    }, 
 
-    } , 
+    update: async(id, body) => {
+
+        const password = body.password
+
+        if (password.length !== 0){
+            const hashed = bcrypt.hashSync(password, 1)        
+            body.password = hashed
+        }
+
+        try {
+            const userDb = await User.findByIdAndUpdate(
+                id, body, {runValidators: true}
+            )
+            return userDb
+    
+        } catch (err) {
+            throw {message: err.message}
+        }
+    },
+
+    delete : async (id) => {
+        await User.findByIdAndDelete({_id : id})
+    }
 
 }
 export default mUser;

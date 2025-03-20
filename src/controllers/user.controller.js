@@ -3,7 +3,7 @@ import mUser from "../models/user.model.js";
 
 const UserController = {
     create: async(req, res) => {
-        const body = req.body;
+        const body = req.body;        
         try {
             await mUser.create(body);
             res.json({error: false, message: 'usuario agregado'})
@@ -31,18 +31,18 @@ const UserController = {
             const userDb = await mUser.update(id, body)
             if (userDb) {
 
-                updatedUser = JSON.stringify(userDb)
+                const updatedUser = JSON.stringify(userDb)
                 res.json({
                     error: false,
-                    user: updateUser,
+                    user: updatedUser,
                     message: 'Usuario actualizado con exito'
                 })
             } else {
                 // usuario no encontrado
-                res.status(404).json({error:true, message: err.message})
+                res.status(404).json({error:true, message: 'Usuario no encontrado'})
             }
         } catch (err) {
-            res.status(500).json({error: true, message: 'Fallo el servidor'})
+            res.status(500).json({error: true, message: err.message})
         }
     },
 
@@ -66,4 +66,3 @@ const UserController = {
 }
 
 export default UserController;
-// module.exports = UserController

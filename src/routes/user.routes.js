@@ -1,11 +1,9 @@
 import express from "express";
-// import User from "../models/user.model.js";
 // import authMiddleware from "../middlewares/auth.middleware.js"
 import UserController  from "../controllers/user.controller.js"
 
 const router = express.Router();
 
-// Ruta para registrar un nuevo usuario
 /**
  * @swagger
  * /users:
@@ -94,7 +92,7 @@ router.put("/api/users/:id",  UserController.update)
  *              content: 
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/users'
+ *                        $ref: '#/models/user.model'
  *          404:
  *              description: El usuario no fue encontrado
  * 
