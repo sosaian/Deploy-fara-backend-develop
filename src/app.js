@@ -8,6 +8,7 @@ config.connectDB()
 // Si vamos a configurar CORS, acá iría...
 const app = express()
 app.use(cookieParser())
+app.use(express.json());
 
 // La idea es solamente hacer mención de las rutas con use()
 // pero toda la definición y su implementación viva en su archivo dedicado
