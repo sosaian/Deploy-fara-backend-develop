@@ -5,8 +5,14 @@ const UserController = {
     create: async(req, res) => {
         const body = req.body;        
         try {
-            await mUser.create(body);
-            res.json({error: false, message: 'usuario agregado'})
+            const userDb = await mUser.create(body);
+            const user = {
+                name: userDb.name,
+                email: userDb.email,
+                profilePicture: userDb.profilePicture,
+                id: userDb._id
+            }
+            res.status(201).json({error: false, message: 'usuario agregado', user: user})
         } catch (err) {
             res.status(400).json({error:true, message: err.message})
         }    
@@ -16,7 +22,15 @@ const UserController = {
     getAll: async(req, res) => {
         try {
             const users = await mUser.getAll()
-            res.json({users})
+            const usersDto = users.map(user => {
+                return {
+                    name: user.name,
+                    email: user.email,
+                    profilePicture: user.profilePicture,
+                    id: user._id
+                }
+            });
+            res.json({usersDto})
         } catch (err) {
             res.status(500).json({error:true, message: err.message})
         }
@@ -30,8 +44,12 @@ const UserController = {
             const body = req.body
             const userDb = await mUser.update(id, body)
             if (userDb) {
-
-                const updatedUser = JSON.stringify(userDb)
+                const updatedUser = {
+                    name: userDb.name,
+                    email: userDb.email,
+                    profilePicture: userDb.profilePicture,
+                    id: userDb._id
+                }
                 res.json({
                     error: false,
                     user: updatedUser,

@@ -53,12 +53,13 @@ const mUser = {
                 throw { message: "El correo electrónico ya está registrado" }
             }
 
-            await User.create({
+            const res = await User.create({
                 name: body.name, 
                 email: body.email, 
                 password: hashed,
                 profilePicture: body.profilePicture
             })
+            return res
         } catch(err) {
             throw {message: err.message}
         }

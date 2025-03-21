@@ -5,6 +5,8 @@ import userRoutes from "./routes/user.routes.js"
 import memberRoutes from "./routes/member.routes.js"
 import allyRoutes from "./routes/ally.routes.js"
 import curseRoutes from "./routes/curse.routes.js"
+import swaggerUi from "swagger-ui-express"
+import specs from "./swagger/swagger.js"
 
 config.connectDB()
 
@@ -12,6 +14,7 @@ config.connectDB()
 const app = express()
 app.use(cookieParser())
 app.use(express.json());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs))
 
 // La idea es solamente hacer mención de las rutas con use()
 // pero toda la definición y su implementación viva en su archivo dedicado
