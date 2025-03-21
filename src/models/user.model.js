@@ -42,4 +42,57 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 
 const User = mongoose.model('User', userSchema);
 
-export default User;
+const mUser = {
+    create: async (body) => {
+
+        const password = body.password
+        const hashed = bcrypt.hashSync(password, 1)        
+        try {
+            const existingUser = await User.findOne({ email: body.email });
+            if (existingUser) {
+                throw { message: "El correo electrónico ya está registrado" }
+            }
+
+            const res = await User.create({
+                name: body.name, 
+                email: body.email, 
+                password: hashed,
+                profilePicture: body.profilePicture
+            })
+            return res
+        } catch(err) {
+            throw {message: err.message}
+        }
+    },
+
+    getAll: async () => {
+        const users = await User.find({})
+        return users
+    }, 
+
+    update: async(id, body) => {
+
+        const password = body.password
+
+        if (password.length !== 0){
+            const hashed = bcrypt.hashSync(password, 1)        
+            body.password = hashed
+        }
+
+        try {
+            const userDb = await User.findByIdAndUpdate(
+                id, body, {runValidators: true}
+            )
+            return userDb
+    
+        } catch (err) {
+            throw {message: err.message}
+        }
+    },
+
+    delete : async (id) => {
+        await User.findByIdAndDelete({_id : id})
+    }
+
+}
+export default mUser;
