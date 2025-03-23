@@ -22,7 +22,7 @@ const UserController = {
     getAll: async(req, res) => {
         try {
             const users = await mUser.getAll()
-            const usersDto = users.map(user => {
+            const data = users.map(user => {
                 return {
                     name: user.name,
                     email: user.email,
@@ -30,7 +30,7 @@ const UserController = {
                     id: user._id
                 }
             });
-            res.json({usersDto})
+            res.json({data})
         } catch (err) {
             res.status(500).json({error:true, message: err.message})
         }
