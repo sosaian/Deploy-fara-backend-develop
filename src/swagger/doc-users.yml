@@ -1,5 +1,6 @@
 
 paths:
+  # endpoint post
   /api/users/register:
     post:
       summary: Crea un usuario
@@ -15,11 +16,11 @@ paths:
                 name: 
                     type: string
                     description: El nombre de usuario
-                    example: juan
+                    example: example
                 email: 
                     type: string
                     description: El email de usuario
-                    example: juan@mail.com
+                    example: example@mail.com
                 password: 
                     type: string
                     description: El password de usuario
@@ -46,11 +47,11 @@ paths:
                       name: 
                         type: string
                         description: El nombre de usuario
-                        example: juan
+                        example: example
                       email: 
                         type: string
                         description: El email de usuario
-                        example: juan@mail.com
+                        example: example@mail.com
                       profilePicture:
                         type: string
                         description: La ruta de la imagen
@@ -65,7 +66,22 @@ paths:
                     example: usuario agregado
         '400':
           description: Error de solicitud
-                      
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                      type: boolean
+                      description: true si error al crear sino false
+                      example: true
+                  message:
+                      type: string
+                      description: resultado de la solicitud
+                      example: peticion mal formada
+
+
+  #endpoint get
   /api/users:
     get:
       summary: Obtiene todos los usuarios  
@@ -90,22 +106,104 @@ paths:
                         name: 
                           type: string
                           description: El nombre de usuario
-                          example: juan
+                          example: example
                         email: 
                           type: string
                           description: El email de usuario
-                          example: juan@mail.com
+                          example: example@mail.com
                         profilePicture:
                           type: string
                           description: La ruta de la imagen
                           example: uploads/default-user.jpg
         '500':
           description: Error del servidor
-                      
-#endpoint actualizar
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                      type: boolean
+                      description: true si error sino false
+                      example: true
+                  message:
+                      type: string
+                      description: resultado de la solicitud
+                      example: peticion mal formada
+
+
+  #endpoint get by id
   /api/users/{id}:
+    get:
+      summary: Obtiene un usuario  
+      tags: [Users]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id del usuario 
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Solicitud exitosa
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                        id: 
+                          type: string
+                          description: El id del usuario
+                          example: abc123
+                        name: 
+                          type: string
+                          description: El nombre de usuario
+                          example: example
+                        email: 
+                          type: string
+                          description: El email de usuario
+                          example: example@mail.com
+                        profilePicture:
+                          type: string
+                          description: La ruta de la imagen
+                          example: uploads/default-user.jpg
+        '404':
+          description: El usuario no fue encontrado
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                      type: boolean
+                      description: true si error sino false
+                      example: true
+                  message:
+                      type: string
+                      description: resultado de la solicitud
+                      example: Usuario no encontrado
+
+        '500':
+          description: Error del servidor
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                      type: boolean
+                      description: true si error sino false
+                      example: true
+                  message:
+                      type: string
+                      description: resultado de la solicitud
+                      example: peticion mal formada
+
+
+#endpoint update
     put:
-      summary: Actualiza el usuario a partir de su id
+      summary: Actualiza un usuario a partir de su id
       tags: [Users]
       parameters:
         - in: path
@@ -124,11 +222,11 @@ paths:
                   name: 
                       type: string
                       description: El nombre de usuario
-                      example: juan
+                      example: example
                   email: 
                       type: string
                       description: El email de usuario
-                      example: juan@mail.com
+                      example: example@mail.com
                   password: 
                       type: string
                       description: El password de usuario
@@ -155,11 +253,11 @@ paths:
                         name: 
                             type: string
                             description: El nombre de usuario
-                            example: juan
+                            example: example
                         email: 
                             type: string
                             description: El email de usuario
-                            example: juan@mail.com
+                            example: example@mail.com
                         profilePicture:
                             type: string
                             description: La ruta de la imagen
@@ -174,12 +272,39 @@ paths:
                       example: usuario eliminado  
         '404':
             description: El usuario no fue encontrado
+            content:          
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error: 
+                        type: boolean
+                        description: true si error sino false
+                        example: true
+                    message:
+                        type: string
+                        description: resultado de la solicitud
+                        example: Usuario no encontrado
+            
         '500':
             description: Error del servidor
+            content:          
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error: 
+                        type: boolean
+                        description: true si error sino false
+                        example: true
+                    message:
+                        type: string
+                        description: resultado de la solicitud
+                        example: peticion mal formada
 
-  # /api/users/{id}:
+  # endpoint delete
     delete:
-      summary: Elimina al usuario a partir de su id
+      summary: Elimina un usuario a partir de su id
       tags: [Users]
       parameters:
         - in: path
@@ -206,7 +331,20 @@ paths:
                       example: usuario eliminado
         '404':
           description: El usuario no fue encontrado
-  
+          content:          
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                      type: boolean
+                      description: true si error sino false
+                      example: true
+                  message:
+                      type: string
+                      description: resultado de la solicitud
+                      example: Usuario no encontrado
+
  
 
 
