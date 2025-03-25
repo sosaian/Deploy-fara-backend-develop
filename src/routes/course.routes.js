@@ -7,7 +7,7 @@ router.post("/api/courses", CourseController.create);
 
 router.get("/api/courses", CourseController.getAll);
 
-router.get("/api/courses/:id", CourseController.getOne);
+router.get("/api/courses/:id", CourseController.getCourse);
 
 router.put("/api/courses/:id", CourseController.update);
 
